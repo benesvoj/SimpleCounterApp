@@ -1,15 +1,17 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import styled, { ThemeProvider } from 'styled-components';
+import { createGlobalStyle, ThemeProvider } from 'styled-components';
 import { theme } from './theme';
 import { App } from './App';
 
-const MainContainer = styled.main`
-  padding: 0;
-  margin: 0;
-  width: 100%;
-  height: 100%;
-  background-image: ${(p) => p.theme.background};
+const GlobalStyle = createGlobalStyle`
+  body {
+    padding: 0;
+    margin: 0;
+    background-size: cover;
+    background-image: ${(p) => p.theme.background};
+    font-family: ${(p) => p.theme.fontFamily};
+  }
 `;
 
 const root = ReactDOM.createRoot(
@@ -18,9 +20,8 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <MainContainer>
-        <App />
-      </MainContainer>
+      <GlobalStyle />
+      <App />
     </ThemeProvider>
   </React.StrictMode>
 );
